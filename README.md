@@ -1,67 +1,95 @@
-# Spring AI Project
+# B.Y.O.P (Bring Your Own PDF)
 
-This is a Spring Boot application demonstrating the use of Spring AI with Google's Generative AI models. The project provides a RESTful API for interacting with the AI models for various tasks such as getting answers, movie recommendations, text embeddings, similarity search, and product search.
+B.Y.O.P is a modern, full-stack application that transforms static PDF documents into interactive conversations. By leveraging the power of Spring AI and React, users can upload their documents and chat with them in real-time, asking questions and receiving accurate, context-aware answers.
 
-## Technologies Used
+![Application Screenshot](frontend/src/assets/landing_screenshot.png)
 
-*   Java 21
-*   Spring Boot 3.5.9
-*   Spring AI 1.1.2
-*   Maven
-*   Google Generative AI
+## 🚀 Features
 
-## Features
+### Core Functionality
+- **PDF Ingestion & Analysis**: Seamlessly simple upload process that reads, chunks, and embeds PDF content for AI retrieval.
+- **Interactive Chat**: Real-time conversation interface to query your documents.
+- **RAG Architecture**: Uses Retrieval Augmented Generation to ground AI responses in your actual document content.
 
-*   **Chat:** Get answers from a chat model.
-*   **Movie Recommendations:** Get movie recommendations based on genre, year, and language.
-*   **Text Embeddings:** Generate embeddings for a given text.
-*   **Text Similarity:** Calculate the similarity score between two texts.
-*   **Product Search:** Search for products from a catalog using natural language.
+### Modern UI/UX
+- **Responsive Design**: Built with TailwindCSS for a seamless experience across devices.
+- **Glassmorphism Aesthetics**: sleek, modern interface with transparency and blur effects.
+- **Rich Text Rendering**: Chat responses support Markdown formatting (bold, lists, code blocks) using `markdown-to-jsx`.
+- **Dynamic Feedback**: Real-time status updates for file uploads and processing.
 
-## How to Run the Project
+![Chat Interface](frontend/src/assets/screenshot.png)
 
-1.  **Prerequisites:**
-    *   Java 21 or later
-    *   Maven
+## 🛠️ Tech Stack
 
-2.  **Configuration:**
-    *   You need to have a Google AI API key. Set the `spring.ai.google.genai.api-key` property in the `application.properties` file.
+### Frontend
+- **Framework**: React 19 (via Vite)
+- **Styling**: TailwindCSS, Vanilla CSS (custom animations)
+- **Icons**: Lucide React
+- **Routing**: React Router DOM v7
+- **HTTP Client**: Axios
+- **Markdown**: markdown-to-jsx (Rich text rendering)
 
-3.  **Running the application:**
-    *   You can run the application using the following Maven command:
-        ```bash
-        ./mvnw spring-boot:run
-        ```
+### Backend
+- **Framework**: Spring Boot 3.5.9
+- **AI Integration**: Spring AI 1.1.2
+- **Model Provider**: Google Generative AI (Gemini)
+- **Vector Store**: In-Memory SimpleVectorStore (for demo purposes)
+- **PDF Parsing**: Spring AI PagePdfDocumentReader
 
-The application will start on `http://localhost:8080`.
+## 🏗️ Architecture
 
-## API Endpoints
+1.  **Upload**: User uploads a PDF via the React frontend.
+2.  **Processing**: backend accepts the file, parses it using `PagePdfDocumentReader`.
+3.  **Embedding**: The text is split into chunks and converted into vector embeddings.
+4.  **Storage**: Embeddings are stored in the local Vector Store.
+5.  **Retrieval**: When a user asks a question, the system searches the Vector Store for relevant chunks.
+6.  **Generation**: The relevant context + user question is sent to the AI model to generate a precise answer.
 
-The following are the available API endpoints:
+## 🔧 Setup & Installation
 
-*   `GET /api/{message}`
-    *   Get a response from the chat model.
-    *   **Path Variable:** `message` - The message to send to the chat model.
+### Prerequisites
+- Java 21+
+- Node.js 18+
+- Maven
+- Google AI API Key
 
-*   `POST /api/recommend`
-    *   Get a movie recommendation.
-    *   **Request Parameters:**
-        *   `type` - The genre of the movie (e.g., "action", "comedy").
-        *   `year` - The approximate year of the movie.
-        -   `lang` - The language of the movie.
+### Backend Setup
+1.  Navigate to the project root.
+2.  Configure your API key in `src/main/resources/application.properties`:
+    ```properties
+    spring.ai.google.genai.api-key=YOUR_API_KEY
+    ```
+3.  Run the application:
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+    The backend will start on `http://localhost:8080`.
 
-*   `POST /api/embedding`
-    *   Generate embeddings for a text.
-    *   **Request Parameter:** `text` - The text to generate embeddings for.
+### Frontend Setup
+1.  Navigate to the `frontend` directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+    The frontend will run on `http://localhost:5173`.
 
-*   `POST /api/similarity`
-    *   Calculate the similarity between two texts.
-    *   **Request Parameters:**
-        *   `text1` - The first text.
-        *   `text2` - The second text.
+## 🔄 Recent Updates
 
-*   `POST /api/product`
-    *   Search for products.
-    *   **Request Parameter:** `text` - The search query.
+- **Enhanced Markdown Support**: Switched to `markdown-to-jsx` for stable, crash-free rendering of lists and rich text in chat.
+- **UI Improvements**: Fixed z-index layering issues on the upload button and refined success messages to include filenames.
+- **Backend Optimizations**: Aligned prompt template variables to ensure accurate context injection.
 
-This project uses an in-memory vector store, which is initialized at startup with product data from the `src/main/resources/product_details.txt` file.
+## 📝 API Endpoints
+
+- `POST /api/upload`: Uploads and processes a PDF file.
+- `POST /api/chat`: Sends a message and retrieves context-aware responses.
+
+---
+*Built as a demonstration of Spring AI capabilities paired with a modern React frontend.*

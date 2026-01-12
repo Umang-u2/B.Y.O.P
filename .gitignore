@@ -33,3 +33,11 @@ build/
 .vscode/
 
 application.properties
+docker-compose.yml
+
+### Frontend ###
+**/node_modules/
+**/dist/
+.DS_Store
+.env
+.env.local

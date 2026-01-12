@@ -25,7 +25,7 @@ Features: Voice control, App scheduling, 16M colors, Energy-efficient
 Title: "Men’s Running Shoes"
 Description: Breathable mesh material with cushioned sole for high-impact activities.
 Price: $39.95
-Category: Footwear
+Category: FootwearWireless Charging Pad
 Features: Lightweight, Non-slip grip, Arch support, Multiple colors
 
 Title: "Electric Beard Trimmer"
