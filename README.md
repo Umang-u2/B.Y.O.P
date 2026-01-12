@@ -19,6 +19,10 @@ B.Y.O.P is a modern, full-stack application that transforms static PDF documents
 
 ![Chat Interface](frontend/src/assets/screenshot.png)
 
+### Context-Aware Product Search
+![Product Search Example](frontend/src/assets/chat_response_example.png)
+*Example: Asking for travel suggestions based on the uploaded product catalog.*
+
 ## 🛠️ Tech Stack
 
 ### Frontend
